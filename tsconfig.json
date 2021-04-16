@@ -2,6 +2,11 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "commonjs",
+    "baseUrl": "./",
+    "paths": {
+      "@global/*": ["global/*"],
+      "@helpers/*": ["helpers/*"]
+    },
     "strict": true,
     "lib": [
         "dom",

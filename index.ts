@@ -1,15 +1,21 @@
-import { recordUSBPacketsAsync } from './lib/recordUSBPackets'
-import { translatePackets } from './lib/translatePackets'
-import { parsePacketDataAsync } from './lib/packetParser'
+import { recordUSBPacketsAsync } from '@helpers/recordUSBPackets'
+import { translatePackets } from '@helpers/translatePackets'
+import { checkPacketDataAsync } from '@helpers/packetChecker'
+import { AnswerKey } from '@global/typings'
 
-const main = async () =>{
+const test_case = async (assertion: AnswerKey) =>{
     console.log('start recording')
     await recordUSBPacketsAsync()
+
     console.log('start translate')
     translatePackets()
-    //console.log('start parsing')
-    //await parsePacketDataAsync()
-    console.log('end')
+
+    console.log('start parsing')
+    const case_result = await checkPacketDataAsync(assertion)
+
+    console.log(`end, result: ${case_result}` )
 }
 
-main()
+
+const check_target: AnswerKey = { device: 'Kraken X' }
+test_case(check_target)
