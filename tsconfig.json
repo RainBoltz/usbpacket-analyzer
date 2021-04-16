@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "lib": [
+        "dom",
+        "es5",
+        "scripthost",
+        "es2015.promise",
+        "es2015.iterable"
+      ]
+  },
+  "includes": [
+    "index.ts",
+    "lib/**/*.ts"
+  ]
+}
