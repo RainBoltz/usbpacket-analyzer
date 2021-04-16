@@ -9,7 +9,7 @@ const delaySync = (milliseonds: number): Promise<Function> => {
 const USBPCAP_PATH: string = 'C:\\Program Files\\USBPcap\\USBPcapCMD.exe'
 const USBHUB_ID: string = '\\\\.\\USBPcap1'
 
-export const recordUSBPacketsAsync = async (output_name: string = 'output.pcap',duration_seconds: number = 10) => {
+export const recordUSBPacketsAsync = async (duration_seconds: number = 10, output_name: string = 'output.pcap') => {
   const subprocess = exec(`"${USBPCAP_PATH}" -d${USBHUB_ID} -A -o"${output_name}"`)
 
   subprocess.on('close', (code, signal) => {

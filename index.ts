@@ -4,13 +4,15 @@ import { checkPacketDataAsync } from '@helpers/packetChecker'
 import { AnswerKey } from '@global/typings'
 
 const test_case = async (assertion: AnswerKey) =>{
-    console.log('start recording')
-    await recordUSBPacketsAsync()
+    const record_time: number = 5
 
-    console.log('start translate')
+    console.log(`start recording packets (for ${record_time} seconds)`)
+    await recordUSBPacketsAsync(record_time)
+
+    console.log('start translating binary to text')
     translatePackets()
 
-    console.log('start parsing')
+    console.log('start parsing ')
     const case_result = await checkPacketDataAsync(assertion)
 
     console.log(`end, result: ${case_result}` )
