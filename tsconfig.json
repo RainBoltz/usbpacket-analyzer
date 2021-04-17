@@ -1,23 +1,25 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "module":"CommonJS",
+    "strict": true,
     "baseUrl": "./",
     "paths": {
-      "@global/*": ["global/*"],
-      "@helpers/*": ["helpers/*"]
+      "@MyTypings": ["global/typings"],
+      "@MyConstants": ["global/constants"],
+      "@Helpers/*": ["helpers/*"]
     },
-    "strict": true,
     "lib": [
-        "dom",
-        "es5",
-        "scripthost",
-        "es2015.promise",
-        "es2015.iterable"
-      ]
+      "dom",
+      "es5",
+      "es6",
+      "scripthost"
+    ]
   },
   "includes": [
     "index.ts",
-    "lib/**/*.ts"
+    "global/**/*.ts",
+    "helpers/**/*.ts"
   ]
 }

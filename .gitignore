@@ -76,3 +76,4 @@ typings/
 .fusebox/
 
 *.js
+*.js.map

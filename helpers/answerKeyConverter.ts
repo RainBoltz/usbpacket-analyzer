@@ -1,4 +1,4 @@
-import { AnswerKey, AnswerKeyInBinary } from '@global/typings'
+import { AnswerKey, AnswerKeyInBinary } from '../global/typings'
 
 const mapBinValue = (key: string, value: string | number): {[key: string]: string} => {
     //convert device
@@ -25,8 +25,9 @@ export const convertAnswersToBinary = (answerKey: AnswerKey): AnswerKeyInBinary 
 
     for(const [key, value] of Object.entries(answerKey)){
         if(key !== 'device'){
-            binAnswerKey[key] = mapBinValue(key, value)
+            binAnswerKey[key as keyof AnswerKeyInBinary] = mapBinValue(key, value)[key]
         }
     }
     return binAnswerKey
 }
+
