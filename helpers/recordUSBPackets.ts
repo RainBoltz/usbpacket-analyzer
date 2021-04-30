@@ -1,28 +1,29 @@
+import * as fs from 'fs'
 import { exec } from 'child_process'
-import * as kill from 'tree-kill'
-import { PACKET_PCAP_FILE, PACKET_TSV_FILE } from '../global/constants'
+import { ChildProcess } from 'node:child_process';
+import { FILES, THIRD_PARTY} from '../global/constants'
+import { RecordFunctionProperties } from '../global/typings'
+import { delaySync } from "./delaySync";
 
-const delaySync = (milliseonds: number): Promise<Function> => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, milliseonds)
-  })
-}
-const USBPCAP_PATH: string = 'C:\\Program Files\\USBPcap\\USBPcapCMD.exe'
-const USBHUB_ID: string = '\\\\.\\USBPcap1'
+export const recordUSBPacketsAsync = async ({bus_id, output_name = FILES.PACKET_PCAP_FILE, usbpcap_path = THIRD_PARTY.USBPCAP_PATH}: RecordFunctionProperties): Promise<ChildProcess> => {
+  const USBHUB_ID: string = `\\\\.\\USBPcap${bus_id}`
+  const command = `"${usbpcap_path}" -d${USBHUB_ID} -A -o"${output_name}"`
 
-export const recordUSBPacketsAsync = async (duration_seconds: number = 10) => {
-  const command = `"${USBPCAP_PATH}" -d${USBHUB_ID} -A -o"${PACKET_PCAP_FILE}"`
-  console.log(`run: ${command}`)
+  //delete duplicated file
+  fs.unlink('record.pcap', (err) => {})
+
+  console.log(`   -run: ${command}`)
   const subprocess = exec(command)
 
   subprocess.on('close', (code, signal) => {
-    //console.log(`child process terminated due to receipt of signal ${signal}`)
+    console.log(`   -(packet recording process terminated.)`)
   })
 
-  await delaySync(Math.floor(duration_seconds * 1000))
+  console.log(`   -waiting for the process to begin`)
+  await delaySync(1000) //to wait for the process started
 
-  kill(subprocess.pid, 'SIGKILL')
-  
+  return subprocess
+
 }
 
 

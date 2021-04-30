@@ -1,20 +1,43 @@
-export interface AnswerKey{
-    device: string,
-    channel?: number,
-    led_size?: number,
-    direction?: 'left' | 'right',
-    speed?: number,
-    color?: string,
-    runs?: number
+export interface AnswerKey {
+  Device: string,
+  VID: number,
+  PID: number,
+  Settings: {
+    Channel?: number,
+    LEDLength?: number,
+    Direction?: 'left' | 'right',
+    ModesSpeed?: number,
+    LightingMode?: string
+    ColorLevel?: string,
+    LEDSize?: number,
+    Color?: Array<Array<string> | undefined>,
+    LED?: Array<Array<string> | undefined>,
+    [key: string]: any
+  }
 }
 
-export interface AnswerKeyInBinary{
-    vid: string,
-    pid: string,
-    channel?: string,
-    led_size?: string,
-    direction?: string,
-    speed?: string,
-    color?: string,
-    runs?: string
+
+export interface RecordFunctionProperties {
+  duration_seconds?: number,
+  output_name?: string,
+  input_name?: string,
+  bus_id?: number,
+  device_address?: number,
+  answerKey?: AnswerKey,
+  wireshark_path?: string,
+  usbpcap_path?: string
+}
+
+export interface DeviceSettingDetails {
+  isBitmask: boolean,
+  bitIndex: number,
+  byteIndex: number,
+  value: {
+    [key: string]: string | number,
+    [key: number]: string | number
+  }
+}
+
+export interface DeviceSettings {
+  [key: string]: DeviceSettingDetails
 }
