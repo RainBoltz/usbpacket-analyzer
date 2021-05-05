@@ -3,7 +3,7 @@ import { packetDataAssertAsync } from './helpers/packetAssert'
 import { getDeviceDetailsAsync } from './helpers/getDeviceAddress'
 import { transformPackets } from './helpers/transformPackets'
 import { AnswerKey } from './global/typings'
-import { delaySync } from "./helpers/delaySync"
+import { delaySync } from './helpers/delaySync'
 
 import * as kill from 'tree-kill'
 
@@ -11,7 +11,7 @@ const test_case = async (answerKey: AnswerKey) => {
 
   console.log(`1. start to find device address of '${answerKey.Device}'`)
   const device_details = await getDeviceDetailsAsync(answerKey.VID, answerKey.PID)
-  const bus_id: number = 1 //TODO: need to find a way to detect
+  const bus_id: number = 1 //TODO: need to find a way to detect BUS ID
   const device_address = device_details.deviceAddress
   console.log(`   -'${device_details.deviceName}' found on '${bus_id}:${device_address}'`)
 
