@@ -33,8 +33,8 @@ export interface DeviceSettingDetails {
   bitIndex: number,
   byteIndex: number,
   value: {
-    [key: string]: string | number,
-    [key: number]: string | number
+    [key: string]: string | number | Array<number>,
+    [key: number]: string | number | Array<number>
   }
 }
 
