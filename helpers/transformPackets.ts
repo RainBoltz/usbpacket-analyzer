@@ -7,7 +7,7 @@ export const transformPackets = ({bus_id, device_address, input_name = FILES.PAC
   //delete duplicated file
   fs.unlink('record.tsv', (err) => {})
 
-  const filter_command = `-Y "usb.bus_id == ${bus_id} && usb.device_address == ${device_address} && usb.capdata"`
+  const filter_command = `-Y "usb.bus_id == ${bus_id} && usb.device_address == ${device_address} && usb.capdata && usb.irp_info.direction == 0"`
 
   const command: string = `"${wireshark_path}" -r"${input_name}" -Tfields -eusb.capdata ${filter_command} > "${output_name}"`
   console.log(`   -run: ${command}`)

@@ -1,6 +1,15 @@
 import { DeviceSettings } from '../global/typings'
 
 const hue2ambient: DeviceSettings = {
+    ID: {
+        isBitmask: false,
+        bitIndex: -1,
+        byteIndex: -1,
+        value: {
+            VID: 0x1e71,
+            PID: 0x2002
+        }
+    },
     LightingMode: {
         isBitmask: false,
         bitIndex: -1,

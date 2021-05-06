@@ -1,7 +1,7 @@
 export interface AnswerKey {
   Device: string,
-  VID: number,
-  PID: number,
+  VID?: number,
+  PID?: number,
   Settings: {
     Channel?: number,
     LEDLength?: number,
@@ -23,7 +23,7 @@ export interface RecordFunctionProperties {
   input_name?: string,
   bus_id?: number,
   device_address?: number,
-  answerKey?: AnswerKey,
+  answer_key?: AnswerKey,
   wireshark_path?: string,
   usbpcap_path?: string
 }

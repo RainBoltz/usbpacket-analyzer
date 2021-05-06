@@ -1,18 +1,18 @@
 import { recordUSBPacketsAsync } from './helpers/recordUSBPackets'
 import { packetDataAssertAsync } from './helpers/packetAssert'
-import { getDeviceDetailsAsync } from './helpers/getDeviceAddress'
+import { getDeviceDetailsAsync } from './helpers/getDeviceDetails'
 import { transformPackets } from './helpers/transformPackets'
-import { AnswerKey } from './global/typings'
+import { AnswerKey } from '@MyTypings'
 import { delaySync } from './helpers/delaySync'
 
 import * as kill from 'tree-kill'
 
-const test_case = async (answerKey: AnswerKey) => {
+const test_case = async (answer_key: AnswerKey) => {
 
-  console.log(`1. start to find device address of '${answerKey.Device}'`)
-  const device_details = await getDeviceDetailsAsync(answerKey.VID, answerKey.PID)
+  console.log(`1. start to find device address of '${answer_key.Device}'`)
+  const device_details = await getDeviceDetailsAsync(answer_key.Device)
   const bus_id: number = 1 //TODO: need to find a way to detect BUS ID
-  const device_address = device_details.deviceAddress
+  const device_address = device_details.deviceAddress - 1
   console.log(`   -'${device_details.deviceName}' found on '${bus_id}:${device_address}'`)
 
   console.log(`2. start recording packets`)
@@ -30,16 +30,14 @@ const test_case = async (answerKey: AnswerKey) => {
   transformPackets({ bus_id, device_address })
 
   console.log('6. start assertion ')
-  const case_result = packetDataAssertAsync({ answerKey })
+  const case_result = packetDataAssertAsync({ answer_key })
 
   console.log(`   -End task, result: ${case_result}`)
 }
 
 
 const assertion: AnswerKey = {
-  Device: 'Hue2 Ambient',
-  VID: 0x1e71,
-  PID: 0x2002,
+  Device: 'Hue 2 Ambient',
   Settings: {
     LightingMode: 'Pulse mode'
   }

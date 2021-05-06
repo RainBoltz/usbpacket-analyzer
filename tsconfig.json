@@ -21,6 +21,7 @@
   "includes": [
     "index.ts",
     "global/**/*.ts",
-    "helpers/**/*.ts"
+    "helpers/**/*.ts",
+    "device-packet-details/**/*.ts"
   ]
 }
