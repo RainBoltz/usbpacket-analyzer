@@ -77,3 +77,6 @@ typings/
 
 *.js
 *.js.map
+*.pcap
+*.tsv
+*-lock.json
